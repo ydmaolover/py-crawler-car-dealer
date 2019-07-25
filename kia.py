@@ -34,12 +34,9 @@ for prov in province_nm[1:]:
         #print('正在爬取的是{}'.format(city.text))
         city.click()
         time.sleep(1)
-        serv_list=driver.find_element_by_id('pc_dealer_list')
-        dealer_list=serv_list.find_elements_by_css_selector('td.ng-binding')
+        dealer_list=driver.find_elements_by_xpath('//tbody[@id="pc_dealer_list"]/tr/td[@class="ng-binding"]')
         dealer_last=[i.text for i in dealer_list]
         print('{}的商户列表是：{}'.format(city.text,dealer_last))
         result.extend(dealer_last)
 driver.quit()
 mchnt_name=pd.DataFrame(result,columns=['mchnt_name'])
-
-#手动去除'4S店'
